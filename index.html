@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gestor</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  </head>
+  <body>
+    <header
+      class="flex items-center justify-between m-2 gap-5 border rounded-lg p-2"
+    >
+      <div class="flex gap-5 items-center">
+        <div class="w-10 items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
+            <!--!Font Awesome Free v7.3.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.-->
+            <path
+              fill="#123F5A"
+              d="M128 96C92.7 96 64 124.7 64 160L64 448C64 483.3 92.7 512 128 512L512 512C547.3 512 576 483.3 576 448L576 256C576 220.7 547.3 192 512 192L136 192C122.7 192 112 181.3 112 168C112 154.7 122.7 144 136 144L520 144C533.3 144 544 133.3 544 120C544 106.7 533.3 96 520 96L128 96zM480 320C497.7 320 512 334.3 512 352C512 369.7 497.7 384 480 384C462.3 384 448 369.7 448 352C448 334.3 462.3 320 480 320z"
+            />
+          </svg>
+        </div>
+        <div>
+          <h1 class="text-3xl">Gestor de finanzas personanes</h1>
+          <p class="text-center">
+            controla tus gastos e ingresos de forma sensilla
+          </p>
+        </div>
+      </div>
+      <div class="flex gap-5 items-center">
+        <div
+          class="w-10 h-10 rounded-full bg-gray-600 flex justify-center items-center"
+        >
+          <p id="iniciales">DA</p>
+        </div>
+        <div id="nombre"><p>Dario Arias</p></div>
+        <div class="w-5">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
+            <!--!Font Awesome Free v7.3.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.-->
+            <path
+              fill="rgb(116, 192, 252)"
+              d="M320 64C302.3 64 288 78.3 288 96L288 99.2C215 114 160 178.6 160 256L160 277.7C160 325.8 143.6 372.5 113.6 410.1L103.8 422.3C98.7 428.6 96 436.4 96 444.5C96 464.1 111.9 480 131.5 480L508.4 480C528 480 543.9 464.1 543.9 444.5C543.9 436.4 541.2 428.6 536.1 422.3L526.3 410.1C496.4 372.5 480 325.8 480 277.7L480 256C480 178.6 425 114 352 99.2L352 96C352 78.3 337.7 64 320 64zM258 528C265.1 555.6 290.2 576 320 576C349.8 576 374.9 555.6 382 528L258 528z"
+            />
+          </svg>
+        </div>
+      </div>
+    </header>
+    <main>
+      <section class="grid grid-cols-3 justify-around m-5 gap-3
+      ">
+        <div class="border rounded w-auto h-40"><div><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="50" height="50" fill="none">
+  <rect x="35" y="30" width="60" height="45" rx="7"
+        stroke="currentColor" stroke-width="4"/>
+  <path d="M40 30V23Q40 18 46 18H88Q95 18 95 25V30"
+        stroke="currentColor" stroke-width="4"/>
+  <path d="M78 42H95V60H78Q72 60 72 51T78 42Z"
+        stroke="currentColor" stroke-width="3"/>
+  <circle cx="80" cy="51" r="2.5" fill="currentColor"/>
+
+  <!-- Flecha hacia adentro -->
+  <path d="M6 52H32M22 42L32 52L22 62"
+        stroke="#22c55e" stroke-width="4"
+        stroke-linecap="round" stroke-linejoin="round"/>
+</svg></div>
+            <h2>Ingresos Totales</h2>
+            <p>$123000</p>
+        </div>
+        <div class="border rounded w-auto">
+            <div><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="50" height="50" fill="none">
+  <rect x="5" y="30" width="60" height="45" rx="7"
+        stroke="currentColor" stroke-width="4"/>
+  <path d="M10 30V23Q10 18 16 18H58Q65 18 65 25V30"
+        stroke="currentColor" stroke-width="4"/>
+  <path d="M48 42H65V60H48Q42 60 42 51T48 42Z"
+        stroke="currentColor" stroke-width="3"/>
+  <circle cx="50" cy="51" r="2.5" fill="currentColor"/>
+
+  <!-- Flecha hacia afuera -->
+  <path d="M68 52H94M84 42L94 52L84 62"
+        stroke="#ef4444" stroke-width="4"
+        stroke-linecap="round" stroke-linejoin="round"/>
+</svg></div>
+            <h2>Gastos Totales</h2>
+            <p>$12394
+            </p>
+        </div>
+        <div class="border rounded w-auto">
+            <div><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="45" height="45">
+  <!-- Billetera -->
+  <path d="M18 34V25Q18 19 25 19H72Q78 19 78 26V34"
+        fill="none" stroke="#123F5A" stroke-width="5"
+        stroke-linecap="round"/>
+
+  <!-- Tarjetas -->
+  <path d="M29 25L69 9Q73 8 75 13L79 24L38 38Z"
+        fill="#16A36A"/>
+  <path d="M24 31L67 16L73 31H24Z"
+        fill="#16A36A"/>
+
+  <!-- Cuerpo de la billetera -->
+  <rect x="10" y="30" width="80" height="58" rx="8"
+        fill="#123F5A"/>
+
+  <!-- Cierre -->
+  <path d="M67 44H88Q93 44 93 49V66Q93 71 88 71H67Q57 71 57 58Q57 44 67 44Z"
+        fill="#123F5A" stroke="#FFFFFF" stroke-width="2.5"/>
+  <circle cx="75" cy="58" r="3.5" fill="#FFFFFF"/>
+
+  <!-- Gráfico financiero -->
+  <circle cx="30" cy="67" r="22" fill="#16A36A"/>
+  <rect x="16" y="74" width="6" height="9" rx="1" fill="#FFFFFF"/>
+  <rect x="26" y="68" width="6" height="15" rx="1" fill="#FFFFFF"/>
+  <rect x="36" y="60" width="6" height="23" rx="1" fill="#FFFFFF"/>
+
+  <!-- Flecha ascendente -->
+  <path d="M15 70Q27 68 39 53"
+        fill="none" stroke="#FFFFFF" stroke-width="2.5"
+        stroke-linecap="round"/>
+  <path d="M32 54L40 51L41 59"
+        fill="none" stroke="#FFFFFF" stroke-width="2.5"
+        stroke-linecap="round" stroke-linejoin="round"/>
+</svg></div>
+            <h2>Balane Neto</h2>
+            <p>$12600</p>
+        </div>
+        
+      </section>
+      <section class="flex justify-around m-5">
+        <div class="border w-100 h-70">
+            <form action=""><fieldset>formulario</fieldset></form>
+        </div>
+        <div class="border w-100">Historial</div>
+      </section>
+    </main>
+  </body>
+</html>
