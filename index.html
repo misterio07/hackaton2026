@@ -286,23 +286,31 @@
       <section class="flex flex-col sm:flex-row justify-around m-5">
         <div class="border w-100 h-70 rounded-xl bg-white">
           <h2>Formulario de Registro</h2>
-          <form action="">
-            <label for="descripción">Descripción</label>
-            <input type="text" name="descripción"
-              placeholder="Ej: Compra supermercado">
-            <label for="monto">Monto</label>
-            <input type="number" name="monto" placeholder="0.00">
-            <label for="tipo">Tipo</label>
-            <select name="tipo">
-              <option value="Ingreso">Ingreso</option>
-              <option value="Gasto">Gasto</option>
-            </select>
+          <form action>
+            <div>
+              <label for="descripción">Descripción</label>
+              <input type="text" name="descripción"
+                placeholder="Ej: Compra supermercado">
+            </div>
+            <div>
+              <label for="monto">Monto</label>
+              <input type="number" name="monto" placeholder="0.00">
+            </div>
+            <div>
+              <label for="tipo">Tipo</label>
+              <select name="tipo">
+                <option value="Ingreso">Ingreso</option>
+                <option value="Gasto">Gasto</option>
+              </select>
+            </div>
+            <div>
             <label for="categoría">Categoría</label>
             <select name="categoría">
               <option value="Sueldo">Sueldo</option>
               <option value="Comida">Comida</option>
               <option value="Transporte">Transporte</option>
             </select>
+            </div>
             <input type="submit" value="Registrar Movimiento">
           </form>
         </div><!-- aplicar estilos y media querys -->
@@ -314,4 +322,5 @@ Comida, Transporte). -->
     </main>
   </body>
 </html>
-<!-- Para las class https://lenguajejs.com/javascript/oop/que-es/ -->
+<!-- Para las class https://lenguajejs.com/javascript/oop/que-es/ 
+ https://www.youtube.com/watch?v=aozaIKnxygA-->
