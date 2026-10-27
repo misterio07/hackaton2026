@@ -285,34 +285,44 @@
 
       <section class="flex flex-col sm:flex-row justify-around m-5">
         <div class="border w-100 h-70 rounded-xl bg-white">
-          <h2>Formulario de Registro</h2>
-          <form action>
-            <div>
-              <label for="descripción">Descripción</label>
-              <input type="text" name="descripción"
-                placeholder="Ej: Compra supermercado">
+          <div class="m-2 flex flex-col h-11/12">
+            <div class="flex flex-row gap-2.5 items-center">
+            <img src="./assets/circulo.png">
+            <h2 class="font-medium text-xl">Formulario de Registro</h2>
             </div>
-            <div>
-              <label for="monto">Monto</label>
-              <input type="number" name="monto" placeholder="0.00">
-            </div>
-            <div>
-              <label for="tipo">Tipo</label>
-              <select name="tipo">
-                <option value="Ingreso">Ingreso</option>
-                <option value="Gasto">Gasto</option>
+            <form action="" class="flex flex-col justify-between h-11/12 mt-2.5">
+              <div class="flex flex-row justify-between">
+                <label for="descripción">Descripción</label>
+                <input type="text" name="descripción"
+                  placeholder="Ej: Compra supermercado">
+              </div>
+              <div class="flex flex-row justify-between">
+                <label for="monto">Monto</label>
+                <input type="number" name="monto" placeholder="0.00">
+              </div>
+              <div class="flex flex-row justify-between">
+                <label for="tipo">Tipo</label>
+                <select name="tipo">
+                  <option value="Ingreso">Ingreso</option>
+                  <option value="Gasto">Gasto</option>
+                </select>
+              </div>
+              <div class="flex flex-row justify-between">
+              <label for="categoría">Categoría</label>
+              <select name="categoría">
+                <option value="Sueldo">Sueldo</option>
+                <option value="Comida">Comida</option>
+                <option value="Transporte">Transporte</option>
               </select>
-            </div>
-            <div>
-            <label for="categoría">Categoría</label>
-            <select name="categoría">
-              <option value="Sueldo">Sueldo</option>
-              <option value="Comida">Comida</option>
-              <option value="Transporte">Transporte</option>
-            </select>
-            </div>
-            <input type="submit" value="Registrar Movimiento">
-          </form>
+              </div>
+              <div class="flex justify-center">
+                <div class="flex flex-row justify-center gap-2 bg-blue-500">
+                  <img src="assets/mas (2).png">
+                  <input type="submit" value="Registrar Movimiento" class="inline">
+                </div>
+              </div>
+            </form>
+          </div>
         </div><!-- aplicar estilos y media querys -->
         <!-- Formulario de Registro: Inputs claros para ingresar la Descripción del movimiento, el Monto
 (numérico), y elementos <select> para elegir el Tipo (Ingreso o Gasto) y la Categoría (ej. Sueldo,
