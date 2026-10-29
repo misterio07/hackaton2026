@@ -6,7 +6,7 @@ import Transaccion from "./classes/Transaccion.js";
 /* probando */
 const sueldo = new Transaccion("ingreso", "sueldo", 1000, "trabajo", '2026-10-28');
 const compra = new Transaccion("gasto", "kiosco", 900, "Alfajor", '2026-10-28');
-const sueldo1 = new Transaccion("ingreso", "sueldo", 1000, "trabajo", '2026-09-28');
+const sueldo1 = new Transaccion("ingreso", "sueldo", 1200, "trabajo", '2026-09-28');
 const compra2 = new Transaccion("gasto", "kiosco", 800, "Alfajor", '2026-09-28');
 const historial = Transaccion.obtenerHistorial();
 
@@ -64,19 +64,28 @@ function balanceAnterior() {
 /* designar resultado de funciones a variables para reutilizar*/
 const a = balanceActual()
 const b = balanceAnterior()
-
+console.log(a,b)
 function porcentaje(id, valor) {
     const elemento = document.getElementById(id)
     let resultado
     if (valor === "ingreso") {
-        resultado = ((ingreso - ingreso2) / ingreso2) * 100;
+        resultado = ingreso - ingreso2
     } else if (valor === "gasto") {
-        resultado = ((gasto - gasto2) / gasto2) * 100;
+        resultado = gasto - gasto2 
     } else {
-        resultado = ((b - a) / b) * 100
+        resultado = a - b
+        console.log(resultado)
     }
-    let color 
-    const cambiar = id ==="gastoP" ? color ="#DC2626":color ="#16A34A";
+    
+    let cambiar;
+
+if (resultado === 0) {
+    cambiar = "#9CA3AF";
+} else if (valor === "gasto") {
+    cambiar = resultado > 0 ? "#dc2626" : "#16A34A";
+} else {
+    cambiar = resultado > 0 ? "#16A34A" : "#dc2626";
+}
     elemento.innerHTML = resultado === 0
         ? `<div class="flex  justify-center items-center "><svg
   xmlns="http://www.w3.org/2000/svg"
@@ -92,8 +101,8 @@ function porcentaje(id, valor) {
     stroke-linecap="round"
     stroke-linejoin="round"
   />
-</svg>${resultado}% vs mes anterior</div>`
-        : resultado < 0 ?
+</svg>$${resultado} vs mes anterior</div>`
+        : resultado > 0 ?
             `<div class="flex  justify-center items-center ">
         <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -104,12 +113,12 @@ function porcentaje(id, valor) {
               <path
                 d="M32 68 L67 33 M43 33 H67 V57"
                 fill="none"
-                stroke=${color}
+                stroke="${cambiar}"
                 stroke-width="7"
                 stroke-linecap="round"
                 stroke-linejoin="round"
               />
-            </svg>${resultado.toFixed(2)}% vs mes anterior </div>`
+            </svg>$${resultado.toFixed(2)} vs mes anterior </div>`
             : `<div class="flex  justify-center items-center "><svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 100 100"
@@ -119,16 +128,17 @@ function porcentaje(id, valor) {
               <path
                 d="M32 32 L67 67 M43 67 H67 V43"
                 fill="none"
-                stroke=${color}
+                stroke="${cambiar}"
                 stroke-width="7"
                 stroke-linecap="round"
                 stroke-linejoin="round"
               />
-            </svg>${resultado.toFixed(2)}% vs mes anterior </div>`;
+            </svg>$${resultado.toFixed(2)} vs mes anterior </div>`;
 }
+
 porcentaje("ingresoP", "ingreso")
 porcentaje("gastoP", "gasto")
-porcentaje("balanceP")
+porcentaje("balanceP","balance")
 
 
 
