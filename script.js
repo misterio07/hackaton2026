@@ -101,7 +101,6 @@ function porcentaje(valor, id, fecha = new Date().toISOString().slice(0, 10)) {
               />
             </svg>${resultado.toFixed(2)}% vs mes anterior </div>`;
 }
-
 porcentaje("ingreso", "ingresosP")
 porcentaje("gasto","gastoP")
 
@@ -109,3 +108,44 @@ calculo("gasto", "gasto");
 calculo("ingreso", "ingreso");
 calculo("balance", "balance")
 
+
+/* Código de Ivo */
+
+/* Para las class https://lenguajejs.com/javascript/oop/que-es/ 
+ https://www.youtube.com/watch?v=aozaIKnxygA
+ es un problema del seccion pq el historial tambien se ve asi
+ investigar en el input como ocultar el texto que sobresalga
+ en el javascript:
+ traer todos los elementos del formulario
+ usar la clase y guardar los value en la clase
+ en el array guardar el historial(se hace automatico)--> */
+
+const descripción = document.getElementById("descripción")
+const monto = document.getElementById("monto")
+const tipo = document.getElementById("tipo")
+const categoría = document.getElementById("categoría")
+const fecha = document.getElementById("fecha")
+const boton = document.getElementById("boton")
+
+
+boton.addEventListener("click", (event) => {
+    event.preventDefault();
+    new Transaccion(tipo.value, descripción.value, Number(monto.value), categoría.value,fecha.value); 
+    console.log(historial);
+    porcentaje("ingreso", "ingresosP")
+    porcentaje("gasto","gastoP")
+
+    calculo("gasto", "gasto");
+    calculo("ingreso", "ingreso");
+    calculo("balance", "balance")
+
+    tipo.value = ""
+    descripción.value = ""
+})
+
+
+
+/* Que no se pueda enviar el form vacio(validaciones)
+historial(despues de que guille haga las funciones)
+local storage
+un minimo de 4 */

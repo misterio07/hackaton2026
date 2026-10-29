@@ -256,7 +256,7 @@
             <img src="./assets/circulo.png">
             <h2 class="font-medium text-xl">Formulario de Registro</h2>
           </div>
-          <form action class="flex flex-col justify-around h-11/12">
+          <form class="flex flex-col justify-around h-11/12">
             <div>
               <div class="flex flex-row justify-between h-11/12 mt-2.5">
                 <div class="flex flex-col gap-1 h-11/12">
@@ -269,20 +269,20 @@
                 </div>
                 <div
                   class="flex flex-col gap-1 justify-start h-11/12 grow ml-3">
-                  <input type="text" name="descripción" id="descripción"
+                  <input type="text" name="descripción" id="descripción" required
                     placeholder="Ej: Compra supermercado" class="focus">
-                  <input type="number" id="monto" name="monto"
+                  <input type="number" id="monto" name="monto" required
                     placeholder="0.00">
-                  <select name="tipo" id="tipo">
-                    <option value="Ingreso">Ingreso</option>
-                    <option value="Gasto">Gasto</option>
+                  <select name="tipo" id="tipo" required>
+                    <option value="ingreso">Ingreso</option>
+                    <option value="gasto">Gasto</option>
                   </select>
-                  <select name="categoría" id="categoría" class>
-                    <option value="Sueldo">Sueldo</option>
-                    <option value="Comida">Comida</option>
-                    <option value="Transporte">Transporte</option>
+                  <select name="categoría" id="categoría" required>
+                    <option value="sueldo">Sueldo</option>
+                    <option value="comida">Comida</option>
+                    <option value="transporte">Transporte</option>
                   </select>
-                  <input type="date" name="fecha" id="fecha">
+                  <input type="date" name="fecha" id="fecha" required>
                 </div>
               </div>
             </div>
@@ -290,11 +290,10 @@
               <div
                 class="flex flex-row justify-center gap-2 bg-blue-500 p-1 border-black rounded-xl">
                 <img src="assets/mas (2).png">
-                <input type="submit" value="Registrar Movimiento"
+                <input type="submit" id="boton" value="Registrar Movimiento"
                   class="inline">
               </div>
             </div>
-
           </form>
         </div>
         <!-- aplicar estilos y media querys -->
