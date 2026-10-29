@@ -4,10 +4,10 @@ import Transaccion from "./classes/Transaccion.js";
 
 
 /* probando */
-const sueldo = new Transaccion("ingreso", "sueldo", 1000, "trabajo", '2026-10-28');
-const compra = new Transaccion("gasto", "kiosco", 900, "Alfajor", '2026-10-28');
-const sueldo1 = new Transaccion("ingreso", "sueldo", 1200, "trabajo", '2026-09-28');
-const compra2 = new Transaccion("gasto", "kiosco", 800, "Alfajor", '2026-09-28');
+const sueldo = new Transaccion("ingreso", "sueldo", 100000, "trabajo", '2026-10-28');
+const compra = new Transaccion("gasto", "kiosco", 40000, "Alfajor", '2026-10-28');
+const sueldo1 = new Transaccion("ingreso", "sueldo", 80000, "trabajo", '2026-09-28');
+const compra2 = new Transaccion("gasto", "kiosco", 60000, "Alfajor", '2026-09-28');
 const historial = Transaccion.obtenerHistorial();
 
 console.log(historial);
@@ -41,41 +41,15 @@ function calculo2(valor, fecha = new Date().toISOString().slice(0, 10)) {
     return resultado
 }
 
-/*designar resultado de funciones a variables para reutilizar */
-const gasto = calculo("gasto", "gasto");
-const ingreso = calculo("ingreso", "ingreso");
-const gasto2 = calculo2("gasto");
-const ingreso2 = calculo2("ingreso");
 
-/* calcular balance mes altual */
-function balanceActual() {
-    const balance = document.getElementById("balance")
-    const resultado2 = ingreso - gasto
-    balance.textContent = resultado2
+ 
 
-    return resultado2
-}
-/* calcular balance mes anterior*/
-function balanceAnterior() {
-    const resultado2 = ingreso2 - gasto2
-    return resultado2
-}
+/*funcion para calcular la diferencia entre un mes y otro */
 
-/* designar resultado de funciones a variables para reutilizar*/
-const a = balanceActual()
-const b = balanceAnterior()
-console.log(a,b)
-function porcentaje(id, valor) {
+function diferencia(id, valor,actual,anterior) {
     const elemento = document.getElementById(id)
-    let resultado
-    if (valor === "ingreso") {
-        resultado = ingreso - ingreso2
-    } else if (valor === "gasto") {
-        resultado = gasto - gasto2 
-    } else {
-        resultado = a - b
-        console.log(resultado)
-    }
+    let resultado = actual-anterior
+    
     
     let cambiar;
 
@@ -135,12 +109,25 @@ if (resultado === 0) {
               />
             </svg>$${resultado.toFixed(2)} vs mes anterior </div>`;
 }
+/*funcion para actializar las tarjetas */
+function actualizarTarjetas() {
+    const gasto = calculo("gasto", "gasto");
+    const ingreso = calculo("ingreso", "ingreso");
 
-porcentaje("ingresoP", "ingreso")
-porcentaje("gastoP", "gasto")
-porcentaje("balanceP","balance")
+    const gasto2 = calculo2("gasto");
+    const ingreso2 = calculo2("ingreso");
 
+    const a = ingreso - gasto;
+    const b = ingreso2 - gasto2;
 
+    document.getElementById("balance").textContent = a;
+
+    diferencia("ingresoP", "ingreso", ingreso, ingreso2);
+    diferencia("gastoP", "gasto", gasto, gasto2);
+    diferencia("balanceP", "balance", a, b);
+}
+
+actualizarTarjetas()
 
 
 /* Código de Ivo */
@@ -166,15 +153,13 @@ boton.addEventListener("click", (event) => {
     event.preventDefault();
     new Transaccion(tipo.value, descripción.value, Number(monto.value), categoría.value,fecha.value); 
     console.log(historial);
-    porcentaje("ingreso", "ingresosP")
-    porcentaje("gasto","gastoP")
+    
+    actualizarTarjetas()
 
-    calculo("gasto", "gasto");
-    calculo("ingreso", "ingreso");
-    calculo("balance", "balance")
-
-    tipo.value = ""
-    descripción.value = ""
+    tipo.value = "";
+    descripción.value = "";
+    monto.value = "";
+    categoría.value = "";
 })
 
 
