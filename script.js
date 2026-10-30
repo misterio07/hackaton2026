@@ -191,25 +191,53 @@ boton.addEventListener("click", (event) => {
 });
 
 /* Que no se pueda enviar el form vacio(validaciones)
-historial(despues de que guille haga las funciones)
+historial boton borrar y verificacion de categoria vacia.
 local storage
 un minimo de 4 */
 
 const tabla = document.getElementById("tabla");
 
 const mostrarTabla = (parametro) => {
-  const filtro = parametro.filter((e) => e.id < historial.length - 4);
+  const filtro = parametro.filter((e) => e.id > historial.length - 4);
 
-  const filtrado = filtro.map(
-    (e) =>
-      `
+  const filtrado = filtro
+    .map(
+      (e) =>
+        `
             <tr>
                 <td>${e.descripcion}</td>
                 <td>${e.categoria}</td>
                 <td>${e.monto}</td>
-                <td><button id="eliminar">boton</button></td>
-            </tr>`).join("");
+                <td><button>Eliminar</button></td>
+            </tr>`,
+    )
+    .join("");
   tabla.innerHTML = filtrado;
 };
 mostrarTabla(historial);
+
+
+const botonEliminar = () => {
+  const botones = document.querySelectorAll("td button");
+  botones.forEach((b) => {
+    b.addEventListener("click", (event) => {
+      let tr = event.target.closest("tr");
+      let td = tr.querySelectorAll("td");
+      eliminarRegistro(td[0].textContent, td[1].textContent, td[2].textContent);
+    });
+  });
+};
+botonEliminar()
+const eliminarRegistro = (descripcion, categoria, monto) => {
+  const elementoEliminar = historial.find(
+    (e) =>
+      e.descripcion == descripcion &&
+      e.categoria == categoria &&
+      e.monto == monto,
+  );
+  historial.splice(historial.indexOf(elementoEliminar),1);
+  mostrarTabla(historial)
+  botonEliminar()
+};
+
 /* TODOS ingresos o gastos/ categoria monto fecha*/
