@@ -177,7 +177,7 @@ boton.addEventListener("click", (event) => {
         JSON.stringify(Transaccion.historial)
     );
     actualizarTarjetas()
-    
+    mostrarTabla(historial)
     tipo.value = "";
     descripción.value = "";
     monto.value = "";
