@@ -216,7 +216,6 @@ const mostrarTabla = (parametro) => {
 };
 mostrarTabla(historial);
 
-
 const botonEliminar = () => {
   const botones = document.querySelectorAll("td button");
   botones.forEach((b) => {
@@ -227,7 +226,7 @@ const botonEliminar = () => {
     });
   });
 };
-botonEliminar()
+botonEliminar();
 const eliminarRegistro = (descripcion, categoria, monto) => {
   const elementoEliminar = historial.find(
     (e) =>
@@ -235,9 +234,21 @@ const eliminarRegistro = (descripcion, categoria, monto) => {
       e.categoria == categoria &&
       e.monto == monto,
   );
-  historial.splice(historial.indexOf(elementoEliminar),1);
-  mostrarTabla(historial)
-  botonEliminar()
+  historial.splice(historial.indexOf(elementoEliminar), 1);
+  mostrarTabla(historial);
+  botonEliminar();
 };
 
 /* TODOS ingresos o gastos/ categoria monto fecha*/
+const filtroCategoria = () => {
+  const select = document.getElementById("filtroCategoria");
+  select.addEventListener("change", (e) => {
+    if (e.target.value !== "todos") {
+      const filtro = historial.filter(r => r.tipo == e.target.value);
+      mostrarTabla(filtro)
+    }else {
+      mostrarTabla(historial)
+    }
+  });
+};
+filtroCategoria(); /* Como hacer trabajar a la misma funcion con y sin argumento */
