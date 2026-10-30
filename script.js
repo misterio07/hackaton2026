@@ -4,13 +4,32 @@ import Transaccion from "./classes/Transaccion.js";
 
 
 /* probando */
-const sueldo = new Transaccion("ingreso", "sueldo", 100000, "trabajo", '2026-10-28');
+/* const sueldo = new Transaccion("ingreso", "sueldo", 100000, "trabajo", '2026-10-28');
 const compra = new Transaccion("gasto", "kiosco", 40000, "Alfajor", '2026-10-28');
 const sueldo1 = new Transaccion("ingreso", "sueldo", 80000, "trabajo", '2026-09-28');
 const compra2 = new Transaccion("gasto", "kiosco", 60000, "Alfajor", '2026-09-28');
-const historial = Transaccion.obtenerHistorial();
+ */
+let historial = Transaccion.obtenerHistorial();
 
-console.log(historial);
+
+/*funcion para guardar historial en localStorage */
+const datosGuardados = localStorage.getItem("historial");
+
+if (datosGuardados){
+    Transaccion.historial = JSON.parse(datosGuardados);
+    actualizarTarjetas()
+    historial = Transaccion.obtenerHistorial();
+    Transaccion.idIncremento = Math.max(...Transaccion.historial.map(t=>t.id)) + 1
+    
+}
+/*funcion  para guardar una copia del historial actual en el localStorage*/
+  function guardarHistoria(){
+     localStorage.setItem("historial",JSON.stringify(Transaccion.historial));
+    
+}
+guardarHistoria() 
+
+
 
 /* calcular ingresos y gasto mes actual */
 
@@ -151,17 +170,20 @@ const boton = document.getElementById("boton")
 
 boton.addEventListener("click", (event) => {
     event.preventDefault();
+    
     new Transaccion(tipo.value, descripción.value, Number(monto.value), categoría.value,fecha.value); 
     console.log(historial);
-    
+    localStorage.setItem(
+        "historial",
+        JSON.stringify(Transaccion.historial)
+    );
     actualizarTarjetas()
-
+    
     tipo.value = "";
     descripción.value = "";
     monto.value = "";
     categoría.value = "";
 })
-
 
 
 /* Que no se pueda enviar el form vacio(validaciones)

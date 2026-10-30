@@ -93,6 +93,7 @@
       </div>
     </header>
     <main>
+      
       <!-- tarajetas -->
       <section
         class="flex flex-col justify-around m-5 gap-3 sm:flex-row items-center"
@@ -219,15 +220,16 @@
 
       <hr class="border w-auto" />
 
-      <section class="flex flex-col  w-full xl:gap-4 justify-around m-5">
-        <div class="flex flex-col justify-around wrap-normal h-11/12 border w-full p-2 rounded-xl bg-white">
-          <div class="flex flex-row gap-2.5 items-center">
-            <img src="./assets/circulo.png">
-            <h2 class="font-medium text-xl">Formulario de Registro</h2>
+      <section class="flex flex-col  w-full sm:gap-4 justify-around  sm:flex-row">
+        <div class="flex flex-col  justify-around wrap-normal m-3 h-11/12 border sm:w-full   pb-2 rounded-xl bg-white">
+          <div class="flex flex-row gap-2.5 items-center m-2 ">
+            <img class="w-[40px] p-[2px]" src="./assets/circulo.png">
+            <h2 class="font-medium text-xl ">Formulario de Registro</h2>
           </div>
-          <form class="flex flex-col justify-around h-11/12">
+          
+          <form class="flex flex-col justify-around h-11/12 pt-2 mt-2 pb-2 mb-2 border-t ">
             <div>
-              <div class="flex flex-row justify-between h-11/12 mt-2.5">
+              <div class="flex flex-row justify-around h-11/12 gap-4 mt-2.5 mb-4">
                 <div class="flex flex-col gap-1 h-11/12">
                   <label for="descripción"
                     class="font-medium">Descripción</label>
@@ -236,8 +238,7 @@
                   <label for="categoría" class="font-medium">Categoría</label>
                   <label for="fecha" class="font-medium">Fecha</label>
                 </div>
-                <div
-                  class="flex flex-col gap-1 justify-start h-11/12 grow ml-3">
+                <div class="flex flex-col gap-1 justify-start  h-11/12  ">
                   <input type="text" name="descripción" id="descripción" required
                     placeholder="Ej: Compra supermercado" class="focus">
                   <input type="number" id="monto" name="monto" required
@@ -255,10 +256,10 @@
                 </div>
               </div>
             </div>
-            <div class="flex justify-center content-center">
+            <div class="flex justify-center content-center items-end">
               <div
                 class="flex flex-row justify-center gap-2 bg-blue-500 p-1 border-black rounded-xl">
-                <img src="assets/mas (2).png">
+                <img  src="assets/mas (2).png" >
                 <input type="submit" id="boton" value="Registrar Movimiento"
                   class="inline">
               </div>
@@ -269,7 +270,7 @@
         <!-- Formulario de Registro: Inputs claros para ingresar la Descripción del movimiento, el Monto
 (numérico), y elementos <select> para elegir el Tipo (Ingreso o Gasto) y la Categoría (ej. Sueldo,
 Comida, Transporte). -->
-        <div class="border w-full">Historial</div>
+        <div class="border sm:w-full  m-3">Historial</div>
       </section>
     </main>
     <script type="module" src="script.js"></script>
