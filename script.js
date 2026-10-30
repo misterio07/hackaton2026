@@ -240,15 +240,16 @@ const eliminarRegistro = (descripcion, categoria, monto) => {
 };
 
 /* TODOS ingresos o gastos/ categoria monto fecha*/
-const filtroCategoria = () => {
-  const select = document.getElementById("filtroCategoria");
-  select.addEventListener("change", (e) => {
-    if (e.target.value !== "todos") {
-      const filtro = historial.filter(r => r.tipo == e.target.value);
-      mostrarTabla(filtro)
-    }else {
-      mostrarTabla(historial)
-    }
-  });
-};
-filtroCategoria(); /* Como hacer trabajar a la misma funcion con y sin argumento */
+
+const select = document.getElementById("filtroCategoria");
+
+select.addEventListener("change", (e) => {
+  if (e.target.value !== "todos") {
+    const filtro = historial.filter((r) => r.tipo == e.target.value);
+    mostrarTabla(filtro);
+  } else {
+    mostrarTabla(historial);
+  }
+});
+
+/* Como hacer trabajar a la misma funcion con y sin argumento */
