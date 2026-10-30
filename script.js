@@ -1,67 +1,92 @@
-
-
 import Transaccion from "./classes/Transaccion.js";
 
-
 /* probando */
-const sueldo = new Transaccion("ingreso", "sueldo", 100000, "trabajo", '2026-10-28');
-const compra = new Transaccion("gasto", "kiosco", 40000, "Alfajor", '2026-10-28');
-const sueldo1 = new Transaccion("ingreso", "sueldo", 80000, "trabajo", '2026-09-28');
-const compra2 = new Transaccion("gasto", "kiosco", 60000, "Alfajor", '2026-09-28');
+const sueldo = new Transaccion(
+  "ingreso",
+  "sueldo",
+  100000,
+  "trabajo",
+  "2026-10-28",
+);
+const compra = new Transaccion(
+  "gasto",
+  "kiosco",
+  40000,
+  "Alfajor",
+  "2026-10-28",
+);
+const sueldo1 = new Transaccion(
+  "ingreso",
+  "sueldo",
+  80000,
+  "trabajo",
+  "2026-09-28",
+);
+const compra2 = new Transaccion(
+  "gasto",
+  "kiosco",
+  60000,
+  "Alfajor",
+  "2026-09-28",
+);
 const historial = Transaccion.obtenerHistorial();
 
 console.log(historial);
 
 /* calcular ingresos y gasto mes actual */
 
-function calculo(valor, idElemento, fecha = new Date().toISOString().slice(0, 10)) {
-    const tarjeta = document.getElementById(idElemento);
-    const mesAnio = fecha.slice(0, 7);/*2026-10 */
+function calculo(
+  valor,
+  idElemento,
+  fecha = new Date().toISOString().slice(0, 10),
+) {
+  const tarjeta = document.getElementById(idElemento);
+  const mesAnio = fecha.slice(0, 7); /*2026-10 */
 
-    const mostrar = historial.filter(a => a.tipo === valor && a.fecha.slice(0, 7) === mesAnio);
-    const resultado = mostrar.reduce((acumulador, Transaccion) => {
-        return acumulador + Transaccion.monto;
-    }, 0
-    );
-    tarjeta.textContent = resultado
-    return resultado
+  const mostrar = historial.filter(
+    (a) => a.tipo === valor && a.fecha.slice(0, 7) === mesAnio,
+  );
+  const resultado = mostrar.reduce((acumulador, Transaccion) => {
+    return acumulador + Transaccion.monto;
+  }, 0);
+  tarjeta.textContent = resultado;
+  return resultado;
 }
 
 /* calcular ingresos y gastos mes anterior */
 function calculo2(valor, fecha = new Date().toISOString().slice(0, 10)) {
-    const fechaAnterior = new Date(fecha + "T12:00:00");
-    fechaAnterior.setMonth(fechaAnterior.getMonth() - 1);
-    const mesAnterior = fechaAnterior.getFullYear() + "-" +
-        String(fechaAnterior.getMonth() + 1).padStart(2, "0");
+  const fechaAnterior = new Date(fecha + "T12:00:00");
+  fechaAnterior.setMonth(fechaAnterior.getMonth() - 1);
+  const mesAnterior =
+    fechaAnterior.getFullYear() +
+    "-" +
+    String(fechaAnterior.getMonth() + 1).padStart(2, "0");
 
-    const resultado = historial
-        .filter(a => a.tipo === valor && a.fecha.slice(0, 7) === mesAnterior)
-        .reduce((acumulador, transaccion) => acumulador + transaccion.monto, 0);
+  const resultado = historial
+    .filter((a) => a.tipo === valor && a.fecha.slice(0, 7) === mesAnterior)
+    .reduce((acumulador, transaccion) => acumulador + transaccion.monto, 0);
 
-    return resultado
+  return resultado;
 }
-
-
- 
 
 /*funcion para calcular la diferencia entre un mes y otro */
 
-function diferencia(id, valor,actual,anterior) {
-    const elemento = document.getElementById(id)
-    let resultado = actual-anterior
-    
-    
-    let cambiar;
+function diferencia(id, valor, actual, anterior) {
+  const elemento = document.getElementById(id);
+  let resultado = actual - anterior;
 
-if (resultado === 0) {
+  let cambiar;
+
+  if (resultado === 0) {
     cambiar = "#9CA3AF";
-} else if (valor === "gasto") {
+  } else if (valor === "gasto") {
     cambiar = resultado > 0 ? "#dc2626" : "#16A34A";
-} else {
+  } else {
     cambiar = resultado > 0 ? "#16A34A" : "#dc2626";
-}
-    elemento.innerHTML = resultado === 0
-        ? `<div class="flex  justify-center items-center "><svg
+  }
+  elemento.innerHTML =
+    resultado === 0
+      ? `<div class="flex  justify-center items-center "><svg
   xmlns="http://www.w3.org/2000/svg"
   viewBox="0 0 100 100"
   width="20"
@@ -76,8 +101,8 @@ if (resultado === 0) {
     stroke-linejoin="round"
   />
 </svg>$${resultado} vs mes anterior</div>`
-        : resultado > 0 ?
-            `<div class="flex  justify-center items-center ">
+      : resultado > 0
+        ? `<div class="flex  justify-center items-center ">
         <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 100 100"
@@ -93,7 +118,7 @@ if (resultado === 0) {
                 stroke-linejoin="round"
               />
             </svg>$${resultado.toFixed(2)} vs mes anterior </div>`
-            : `<div class="flex  justify-center items-center "><svg
+        : `<div class="flex  justify-center items-center "><svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 100 100"
               width="20"
@@ -111,24 +136,23 @@ if (resultado === 0) {
 }
 /*funcion para actializar las tarjetas */
 function actualizarTarjetas() {
-    const gasto = calculo("gasto", "gasto");
-    const ingreso = calculo("ingreso", "ingreso");
+  const gasto = calculo("gasto", "gasto");
+  const ingreso = calculo("ingreso", "ingreso");
 
-    const gasto2 = calculo2("gasto");
-    const ingreso2 = calculo2("ingreso");
+  const gasto2 = calculo2("gasto");
+  const ingreso2 = calculo2("ingreso");
 
-    const a = ingreso - gasto;
-    const b = ingreso2 - gasto2;
+  const a = ingreso - gasto;
+  const b = ingreso2 - gasto2;
 
-    document.getElementById("balance").textContent = a;
+  document.getElementById("balance").textContent = a;
 
-    diferencia("ingresoP", "ingreso", ingreso, ingreso2);
-    diferencia("gastoP", "gasto", gasto, gasto2);
-    diferencia("balanceP", "balance", a, b);
+  diferencia("ingresoP", "ingreso", ingreso, ingreso2);
+  diferencia("gastoP", "gasto", gasto, gasto2);
+  diferencia("balanceP", "balance", a, b);
 }
 
-actualizarTarjetas()
-
+actualizarTarjetas();
 
 /* Código de Ivo */
 
@@ -141,30 +165,51 @@ actualizarTarjetas()
  usar la clase y guardar los value en la clase
  en el array guardar el historial(se hace automatico)--> */
 
-const descripción = document.getElementById("descripción")
-const monto = document.getElementById("monto")
-const tipo = document.getElementById("tipo")
-const categoría = document.getElementById("categoría")
-const fecha = document.getElementById("fecha")
-const boton = document.getElementById("boton")
-
+const descripción = document.getElementById("descripción");
+const monto = document.getElementById("monto");
+const tipo = document.getElementById("tipo");
+const categoría = document.getElementById("categoría");
+const fecha = document.getElementById("fecha");
+const boton = document.getElementById("boton");
 
 boton.addEventListener("click", (event) => {
-    event.preventDefault();
-    new Transaccion(tipo.value, descripción.value, Number(monto.value), categoría.value,fecha.value); 
-    console.log(historial);
-    
-    actualizarTarjetas()
+  event.preventDefault();
+  new Transaccion(
+    tipo.value,
+    descripción.value,
+    Number(monto.value),
+    categoría.value,
+    fecha.value,
+  );
 
-    tipo.value = "";
-    descripción.value = "";
-    monto.value = "";
-    categoría.value = "";
-})
+  actualizarTarjetas();
 
-
+  tipo.value = "";
+  descripción.value = "";
+  monto.value = "";
+  categoría.value = "";
+});
 
 /* Que no se pueda enviar el form vacio(validaciones)
 historial(despues de que guille haga las funciones)
 local storage
 un minimo de 4 */
+
+const tabla = document.getElementById("tabla");
+
+const mostrarTabla = (parametro) => {
+  const filtro = parametro.filter((e) => e.id < historial.length - 4);
+
+  const filtrado = filtro.map(
+    (e) =>
+      `
+            <tr>
+                <td>${e.descripcion}</td>
+                <td>${e.categoria}</td>
+                <td>${e.monto}</td>
+                <td><button id="eliminar">boton</button></td>
+            </tr>`).join("");
+  tabla.innerHTML = filtrado;
+};
+mostrarTabla(historial);
+/* TODOS ingresos o gastos/ categoria monto fecha*/
