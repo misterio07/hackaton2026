@@ -166,10 +166,12 @@ const tipo = document.getElementById("tipo");
 const categoría = document.getElementById("categoría");
 const fecha = document.getElementById("fecha");
 const boton = document.getElementById("boton");
+let bandera = false;
 
 boton.addEventListener("click", (event) => {
     event.preventDefault();
-    
+    validarForm()
+    if(bandera === true){
     new Transaccion(tipo.value, descripción.value, Number(monto.value), categoría.value,fecha.value); 
     console.log(historial);
     localStorage.setItem(
@@ -183,45 +185,38 @@ boton.addEventListener("click", (event) => {
     descripción.value = "";
     monto.value = "";
     categoría.value = "";
+    }
 })
 actualizarTarjetas();
 
 const msgDescripcion = document.getElementById("msgDescripción")
 const msgMonto = document.getElementById("msgMonto")
-const msgFecha = document.getElementById("msgFecha")
-let bandera = false;
+fecha.value = `${new Date().toISOString().slice(0,10)}`;
 
 const validarForm = () => {
   const inputs = document.querySelector(".inputs")
   bandera = true;
-
-  console.log(inputs.children)
   inputs.children[0].addEventListener("change", (e) => {
     if(e.target.value === "" || e.target.value.length < 3){
       msgDescripcion.textContent = "Colocar una descripcion de al menos 3 carácteres"
       bandera = false;
+      return 
+    }else{
+      msgDescripcion.textContent = "";
     }
   })
   inputs.children[2].addEventListener("change", (e) => {
     if(e.target.value.length < 1){
       msgMonto.textContent = "Dar un monto";
       bandera = false;
+      return
+    }else{
+      msgMonto.textContent = "";
     }
   })
-  inputs.children[6].addEventListener("change", (e) => {
-    console.log(e.target.value)
-    if(!e.target.value){
-      msgFecha.textContent = "Elegir una fecha";
-      bandera = false;
-    }
-  })
-  /* los select ya tienen una opcion como default, asi que no hay que preocuparse por ellos */
-  /* La fecha le quiero agregar el dia de hoy como fecha default */
-  /* Lógica */
-  /* La bandera esta true cuando se ejecuta la funcion, si sigue asi despues de todas las verificaciones ejecuta todo el codigo del boton*/
-
+  /* Por alguna razon, la bandera nunca cambia, tal vez habria que cambiar el evento para que no sea  change sino otro */
 }
-validarForm()
+
 
 /* Que no se pueda enviar el form vacio(validaciones)
 historial boton borrar y verificacion de categoria vacia.
