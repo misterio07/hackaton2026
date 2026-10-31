@@ -200,11 +200,11 @@ const mostrarTabla = (parametro) => {
     .map(
       (e) =>
         `
-            <tr>
-                <td>${e.descripcion}</td>
-                <td>${e.categoria}</td>
-                <td>${e.monto}</td>
-                <td><button>Eliminar</button></td>
+            <tr class="text-center">
+                <td class="text-red-800">${e.descripcion}</td>
+                <td class="text-red-800">${e.categoria}</td>
+                <td class="text-red-800">${e.monto}</td>
+                <td class="text-red-800"><button>Eliminar</button></td>
             </tr>`,
     )
     .join("");

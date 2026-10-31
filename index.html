@@ -203,7 +203,7 @@
       <hr class="border w-auto" />
 
       <section class="flex flex-col  w-full sm:gap-4 justify-around  sm:flex-row">
-        <div class="flex flex-col  justify-around wrap-normal m-3 h-11/12 border sm:w-full   pb-2 rounded-xl bg-white">
+        <div class="flex flex-col  justify-around wrap-normal m-3 h-11/12 border sm:w-full    rounded-xl bg-white">
           <div class="flex flex-row gap-2.5 items-center m-2 ">
             <img class="w-[40px] p-[2px]" src="./assets/circulo.png">
             <h2 class="font-medium text-xl ">Formulario de Registro</h2>
@@ -252,32 +252,40 @@
         <!-- Formulario de Registro: Inputs claros para ingresar la Descripción del movimiento, el Monto
 (numérico), y elementos <select> para elegir el Tipo (Ingreso o Gasto) y la Categoría (ej. Sueldo,
 Comida, Transporte). -->
-       <!--  <div class="border sm:w-full  m-3">Historial</div> -->
-        <div class="border w-full m-3 rounded-xl">
-          <div class="border sm:w-full  m-3">
+       
+        <div class="flex flex-col  justify-around wrap-normal m-3 h-11/12 border sm:w-full h-[285px] overflow-hidden  rounded-xl bg-white">
+          <div class="flex flex-row gap-2.5 items-center m-2">
             <!-- icono -->
+              <img class="w-[40px] p-[2px]" src="./assets/circulo.png">
             <h2 class="font-medium text-xl">Historial de Movimientos</h2>
           </div>
-          <h3>Últimas 4 transacciones</h3>
-          <label for="filtro">Mostrar en tabla</label>
+          <div class="flex flex-col justify-around h-11/12 pt-2 mt-2   border-t shadow-lg ">
+           <div class="border  rounded-xl  overflow-hidden m-2"> 
+          <h3 class="text-center">Últimas 4 transacciones</h3>
+          <div class="flex-col m-2 text-end">
+          <label for="filtro">Mostrar en tabla:</label>
           <select name="filtro" id="filtroCategoria">
             <option value="todos" >Todos</option>
             <option value="ingreso">Ingresos</option>
             <option value="gasto">Gastos</option>
           </select>
-          <table>
+          </div>
+          
+          <table class="border-collapse w-full ">
             <thead>
-              <th>Descripción</th>
-              <th>Categoría</th>
-              <th>Monto</th>
-              <th>Acción</th>
+              <th class="border-t border-b ">Descripción</th>
+              <th class="border">Categoría</th>
+              <th class="border">Monto</th>
+              <th class="border-b border-t">Acción</th>
             </thead>
-            <tbody id="tabla">
+            <tbody id="tabla" class="">
               
             </tbody>
           </table>
-          <p class="">blabla</p>
+          <p class=""></p>
           <!-- mensaje de mostrando 4 de 4 movimientos -->
+           </div>
+           </div>
         </div>
       </section>
     </main>
