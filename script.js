@@ -51,6 +51,7 @@ function calculo(
 /* calcular ingresos y gastos mes anterior */
 function calculo2(valor, fecha = new Date().toISOString().slice(0, 10)) {
   const fechaAnterior = new Date(fecha + "T12:00:00");
+  fechaAnterior.setDate(1);
   fechaAnterior.setMonth(fechaAnterior.getMonth() - 1);
   const mesAnterior =
     fechaAnterior.getFullYear() +
