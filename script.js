@@ -1,11 +1,11 @@
 import Transaccion from "./classes/Transaccion.js";
 
 /* probando */
-/* const sueldo = new Transaccion("ingreso", "sueldo", 100000, "trabajo", '2026-10-28');
+const sueldo = new Transaccion("ingreso", "sueldo", 100000, "trabajo", '2026-10-28');
 const compra = new Transaccion("gasto", "kiosco", 40000, "Alfajor", '2026-10-28');
 const sueldo1 = new Transaccion("ingreso", "sueldo", 80000, "trabajo", '2026-09-28');
 const compra2 = new Transaccion("gasto", "kiosco", 60000, "Alfajor", '2026-09-28');
- */
+ 
 let historial = Transaccion.obtenerHistorial();
 
 
@@ -178,13 +178,50 @@ boton.addEventListener("click", (event) => {
     );
     actualizarTarjetas()
     mostrarTabla(historial)
+    botonEliminar();
     tipo.value = "";
     descripción.value = "";
     monto.value = "";
     categoría.value = "";
 })
+actualizarTarjetas();
 
-  actualizarTarjetas();
+const msgDescripcion = document.getElementById("msgDescripción")
+const msgMonto = document.getElementById("msgMonto")
+const msgFecha = document.getElementById("msgFecha")
+let bandera = false;
+
+const validarForm = () => {
+  const inputs = document.querySelector(".inputs")
+  bandera = true;
+
+  console.log(inputs.children)
+  inputs.children[0].addEventListener("change", (e) => {
+    if(e.target.value === "" || e.target.value.length < 3){
+      msgDescripcion.textContent = "Colocar una descripcion de al menos 3 carácteres"
+      bandera = false;
+    }
+  })
+  inputs.children[2].addEventListener("change", (e) => {
+    if(e.target.value.length < 1){
+      msgMonto.textContent = "Dar un monto";
+      bandera = false;
+    }
+  })
+  inputs.children[6].addEventListener("change", (e) => {
+    console.log(e.target.value)
+    if(!e.target.value){
+      msgFecha.textContent = "Elegir una fecha";
+      bandera = false;
+    }
+  })
+  /* los select ya tienen una opcion como default, asi que no hay que preocuparse por ellos */
+  /* La fecha le quiero agregar el dia de hoy como fecha default */
+  /* Lógica */
+  /* La bandera esta true cuando se ejecuta la funcion, si sigue asi despues de todas las verificaciones ejecuta todo el codigo del boton*/
+
+}
+validarForm()
 
 /* Que no se pueda enviar el form vacio(validaciones)
 historial boton borrar y verificacion de categoria vacia.
@@ -192,11 +229,12 @@ local storage
 un minimo de 4 */
 
 const tabla = document.getElementById("tabla");
+const textoTabla = document.getElementById("textoTabla");
 
 const mostrarTabla = (parametro) => {
   const filtro = parametro.filter((e) => e.id > historial.length - 4);
 
-  const filtrado = filtro
+    const filtrado = filtro
     .map(
       (e) =>
         `
@@ -204,16 +242,23 @@ const mostrarTabla = (parametro) => {
                 <td>${e.descripcion}</td>
                 <td>${e.categoria}</td>
                 <td>${e.monto}</td>
-                <td><button>Eliminar</button></td>
+                <td><img src="./assets/borrar.png"></td>
             </tr>`,
     )
     .join("");
   tabla.innerHTML = filtrado;
+  if(tabla.children.length == 0){
+    textoTabla.classList.replace('invisible', 'visible')
+  }else{
+    textoTabla.classList.replace('visible', 'invisible')
+  }
 };
+
 mostrarTabla(historial);
 
+
 const botonEliminar = () => {
-  const botones = document.querySelectorAll("td button");
+  const botones = document.querySelectorAll("td img");
   botones.forEach((b) => {
     b.addEventListener("click", (event) => {
       let tr = event.target.closest("tr");
@@ -235,8 +280,6 @@ const eliminarRegistro = (descripcion, categoria, monto) => {
   botonEliminar();
 };
 
-/* TODOS ingresos o gastos/ categoria monto fecha*/
-
 const select = document.getElementById("filtroCategoria");
 
 select.addEventListener("change", (e) => {
@@ -248,4 +291,4 @@ select.addEventListener("change", (e) => {
   }
 });
 
-/* Como hacer trabajar a la misma funcion con y sin argumento */
+/* Cuando Se Agrega registros en el form supera los 4 elementos de la tabla */

@@ -208,7 +208,6 @@
             <img class="w-[40px] p-[2px]" src="./assets/circulo.png">
             <h2 class="font-medium text-xl ">Formulario de Registro</h2>
           </div>
-          
           <form class="flex flex-col justify-around h-11/12 pt-2 mt-2 pb-2 mb-2 border-t ">
             <div>
               <div class="flex flex-row justify-around h-11/12 gap-4 mt-2.5 mb-4">
@@ -220,48 +219,46 @@
                   <label for="categoría" class="font-medium">Categoría</label>
                   <label for="fecha" class="font-medium">Fecha</label>
                 </div>
-                <div class="flex flex-col gap-1 justify-start  h-11/12  ">
-                  <input type="text" name="descripción" id="descripción" required
+                <div class="flex flex-col gap-1 justify-start  h-11/12 inputs">
+                  <input type="text" name="descripción" id="descripción" 
                     placeholder="Ej: Compra supermercado" class="focus">
-                  <input type="number" id="monto" name="monto" required
+                  <p id="msgDescripción"></p>
+                  <input type="number" id="monto" name="monto" 
                     placeholder="0.00">
-                  <select name="tipo" id="tipo" required>
+                    <p id="msgMonto"></p>
+                  <select name="tipo" id="tipo">
                     <option value="ingreso">Ingreso</option>
                     <option value="gasto">Gasto</option>
                   </select>
-                  <select name="categoría" id="categoría" required>
+                  <select name="categoría" id="categoría">
                     <option value="sueldo">Sueldo</option>
                     <option value="comida">Comida</option>
                     <option value="transporte">Transporte</option>
                   </select>
-                  <input type="date" name="fecha" id="fecha" required>
+                  <input type="date" name="fecha" id="fecha">
+                  <p id="msgFecha"></p>
                 </div>
               </div>
             </div>
             <div class="flex justify-center content-center items-end">
               <div
                 class="flex flex-row justify-center gap-2 bg-blue-500 p-1 border-black rounded-xl">
-                <img  src="assets/mas (2).png" >
+                <img  src="assets/mas.png" >
                 <input type="submit" id="boton" value="Registrar Movimiento"
                   class="inline">
               </div>
             </div>
           </form>
         </div>
-        <!-- aplicar estilos y media querys -->
-        <!-- Formulario de Registro: Inputs claros para ingresar la Descripción del movimiento, el Monto
-(numérico), y elementos <select> para elegir el Tipo (Ingreso o Gasto) y la Categoría (ej. Sueldo,
-Comida, Transporte). -->
-       <!--  <div class="border sm:w-full  m-3">Historial</div> -->
         <div class="border w-full m-3 rounded-xl">
-          <div class="border sm:w-full  m-3">
-            <!-- icono -->
+          <div class="border sm:w-full  m-3 flex flex-row gap-2.5 items-center">
+            <img src="./assets/reloj-circular.png">
             <h2 class="font-medium text-xl">Historial de Movimientos</h2>
           </div>
           <h3>Últimas 4 transacciones</h3>
           <label for="filtro">Mostrar en tabla</label>
           <select name="filtro" id="filtroCategoria">
-            <option value="todos" >Todos</option>
+            <option value="todos">Todos</option>
             <option value="ingreso">Ingresos</option>
             <option value="gasto">Gastos</option>
           </select>
@@ -273,11 +270,10 @@ Comida, Transporte). -->
               <th>Acción</th>
             </thead>
             <tbody id="tabla">
-              
             </tbody>
           </table>
-          <p class="">blabla</p>
-          <!-- mensaje de mostrando 4 de 4 movimientos -->
+          <p class="invisible" id="textoTabla">No hay Registros que mostrar</p>
+          <small id="textoMostrar"></small>
         </div>
       </section>
     </main>
