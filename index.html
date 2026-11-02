@@ -208,7 +208,7 @@
             <img class="w-[40px] p-[2px]" src="./assets/circulo.png">
             <h2 class="font-medium text-xl ">Formulario de Registro</h2>
           </div>
-          <form class="flex flex-col justify-around h-11/12 pt-2 mt-2 pb-2 mb-2 border-t ">
+          <form class="flex flex-col justify-around h-11/12 pt-2 mt-2 pb-2 mb-2 border-t " id="formulario">
             <div>
               <div class="flex flex-row justify-around h-11/12 gap-4 mt-2.5 mb-4">
                 <div class="flex flex-col gap-1 h-11/12">
@@ -221,10 +221,10 @@
                 </div>
                 <div class="flex flex-col gap-1 justify-start  h-11/12 inputs">
                   <input type="text" name="descripción" id="descripción" 
-                    placeholder="Ej: Compra supermercado" class="focus">
+                    placeholder="Ej: Compra supermercado" class="border rounded-xl">
                   <p id="msgDescripción"></p>
                   <input type="number" id="monto" name="monto" 
-                    placeholder="0.00">
+                    placeholder="0.00" class="border rounded-xl">
                     <p id="msgMonto"></p>
                   <select name="tipo" id="tipo">
                     <option value="ingreso">Ingreso</option>
@@ -254,7 +254,7 @@
             <img src="./assets/reloj-circular.png">
             <h2 class="font-medium text-xl">Historial de Movimientos</h2>
           </div>
-          <h3>Últimas 4 transacciones</h3>
+          <h3>Últimas transacciones</h3>
           <label for="filtro">Mostrar en tabla</label>
           <select name="filtro" id="filtroCategoria">
             <option value="todos">Todos</option>
@@ -279,5 +279,3 @@
     <script type="module" src="script.js"></script>
   </body>
 </html>
-<!-- Para las class https://lenguajejs.com/javascript/oop/que-es/ 
- https://www.youtube.com/watch?v=aozaIKnxygA-->
