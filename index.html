@@ -202,8 +202,8 @@
 
       <hr class="border w-auto m-2" />
 
-      <section class="flex flex-col  w-full  justify-around  sm:flex-row">
-        <div class="flex flex-col  justify-around wrap-normal  m-2 h-11/12 border sm:w-full shadow-lg   rounded-xl bg-blue-50">
+      <section class="flex flex-col w-full items-stretch sm:flex-row">
+        <div class="flex flex-col m-2 border sm:w-full overflow-hidden shadow-lg rounded-xl bg-blue-50">
           <div class="flex flex-row gap-2.5 items-center m-2 ">
             <img class="w-[40px] p-[2px]" src="./assets/circulo.png">
             <h2 class="font-medium text-xl ">Formulario de Registro</h2>
@@ -221,10 +221,10 @@
                 </div>
                 <div class="flex flex-col gap-1 justify-start  h-11/12 inputs">
                   <input type="text" name="descripción" id="descripción" 
-                    placeholder="Ej: Compra supermercado" class="border rounded-xl">
+                    placeholder="Ej: Compra supermercado" class="border rounded-xl  pl-2 pr-2 resize-y">
                   <p id="msgDescripción"></p>
                   <input type="number" id="monto" name="monto" 
-                    placeholder="0.00" class="border rounded-xl">
+                    placeholder="0.00" class="border rounded-xl  pl-2 resize-y">
                     <p id="msgMonto"></p>
                   <select name="tipo" id="tipo">
                     <option value="ingreso">Ingreso</option>
@@ -254,7 +254,7 @@
 (numérico), y elementos <select> para elegir el Tipo (Ingreso o Gasto) y la Categoría (ej. Sueldo,
 Comida, Transporte). -->
        
-        <div class="flex flex-col  wrap-normal m-2 h-11/12 border sm:w-full h-[285px] overflow-hidden shadow-lg  rounded-xl bg-blue-50">
+        <div class="flex flex-col m-2 border sm:w-full overflow-hidden shadow-lg rounded-xl bg-blue-50">
           <div class="flex flex-row gap-2.5 items-center m-2">
             <!-- icono -->
               <img class="w-[40px] p-[2px]" src="./assets/circulo.png">
@@ -277,12 +277,13 @@ Comida, Transporte). -->
               <th class="border-t border-b ">Descripción</th>
               <th class="border">Categoría</th>
               <th class="border">Monto</th>
+              <th class="border">Fecha</th>
               <th class="border-b border-t">Acción</th>
             </thead>
             <tbody id="tabla" class="text-center">
             </tbody>
           </table>
-          <p class="invisible" id="textoTabla">No hay Registros que mostrar</p>
+          <p class="invisible text-center m-4 text-xl" id="textoTabla">No hay Registros para mostrar</p>
           <small id="textoMostrar"></small>
         </div>
       </section>
