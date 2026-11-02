@@ -1,32 +1,52 @@
 import Transaccion from "./classes/Transaccion.js";
 
 /* probando */
-/* const sueldo = new Transaccion("ingreso", "sueldo", 100000, "trabajo", '2026-10-28');
-const compra = new Transaccion("gasto", "kiosco", 40000, "Alfajor", '2026-10-28');
-const sueldo1 = new Transaccion("ingreso", "sueldo", 80000, "trabajo", '2026-09-28');
-const compra2 = new Transaccion("gasto", "kiosco", 60000, "Alfajor", '2026-09-28');
- */
-let historial = Transaccion.obtenerHistorial();
+/* const sueldo = new Transaccion(
+  "ingreso",
+  "sueldo",
+  100000,
+  "trabajo",
+  "2026-10-28",
+);
+const compra = new Transaccion(
+  "gasto",
+  "kiosco",
+  40000,
+  "Alfajor",
+  "2026-10-28",
+);
+const sueldo1 = new Transaccion(
+  "ingreso",
+  "sueldo",
+  80000,
+  "trabajo",
+  "2026-09-28",
+);
+const compra2 = new Transaccion(
+  "gasto",
+  "kiosco",
+  60000,
+  "Alfajor",
+  "2026-09-28",
+); */
 
+let historial = Transaccion.obtenerHistorial();
 
 /*funcion para guardar historial en localStorage */
 const datosGuardados = localStorage.getItem("historial");
 
-if (datosGuardados){
-    Transaccion.historial = JSON.parse(datosGuardados);
-    actualizarTarjetas()
-    historial = Transaccion.obtenerHistorial();
-    Transaccion.idIncremento = Math.max(...Transaccion.historial.map(t=>t.id)) + 1
-    
+if (datosGuardados) {
+  Transaccion.historial = JSON.parse(datosGuardados);
+  actualizarTarjetas();
+  historial = Transaccion.obtenerHistorial();
+  Transaccion.idIncremento =
+    Math.max(...Transaccion.historial.map((t) => t.id)) + 1;
 }
 /*funcion  para guardar una copia del historial actual en el localStorage*/
-  function guardarHistoria(){
-     localStorage.setItem("historial",JSON.stringify(Transaccion.historial));
-    
+function guardarHistoria() {
+  localStorage.setItem("historial", JSON.stringify(Transaccion.historial));
 }
-guardarHistoria() 
-
-
+guardarHistoria();
 
 /* calcular ingresos y gasto mes actual */
 
@@ -166,33 +186,72 @@ const monto = document.getElementById("monto");
 const tipo = document.getElementById("tipo");
 const categoría = document.getElementById("categoría");
 const fecha = document.getElementById("fecha");
-const boton = document.getElementById("boton");
+const formulario = document.getElementById("formulario");
+let verificado = false;
 
-boton.addEventListener("click", (event) => {
-    event.preventDefault();
-    
-    new Transaccion(tipo.value, descripción.value, Number(monto.value), categoría.value,fecha.value); 
-    console.log(historial);
-    localStorage.setItem(
-        "historial",
-        JSON.stringify(Transaccion.historial)
+formulario.addEventListener("submit", (event) => {
+  event.preventDefault();
+  verificado = true;
+
+  /* Validación Formulario */
+
+  descripción.classList.add(
+    event.target[0].value.length === 0 ? "border-red-600" : "border-green-600",
+  );
+  monto.classList.add(
+    event.target[0].value.length === 0 ? "border-red-600" : "border-green-600",
+  );
+
+  if (event.target[0].value.length <= 3) {
+    descripción.classList.replace("border-green-600", "border-red-600");
+    msgDescripcion.textContent =
+      "Colocar una descripcion de al menos 4 carácteres";
+    verificado = false;
+  } else {
+    descripción.classList.remove();
+    descripción.classList.replace("border-red-600", "border-green-600");
+    msgDescripcion.textContent = "";
+  }
+
+  if (event.target[1].value.length < 1) {
+    monto.classList.replace("border-green-600", "border-red-600");
+    msgMonto.textContent = "Dar un monto";
+    verificado = false;
+  } else {
+    monto.classList.replace("border-red-600", "border-green-600");
+    msgMonto.textContent = "";
+  }
+
+  /* Guardar Registro */
+
+  if (verificado === true) {
+    new Transaccion(
+      tipo.value,
+      descripción.value,
+      Number(monto.value),
+      categoría.value,
+      fecha.value,
     );
-    actualizarTarjetas()
-    mostrarTabla(historial)
-    tipo.value = "";
+    console.log(historial);
+    localStorage.setItem("historial", JSON.stringify(Transaccion.historial));
+    actualizarTarjetas();
+    mostrarTabla(historial);
+    botonEliminar();
     descripción.value = "";
     monto.value = "";
-    categoría.value = "";
-})
+    verificado = false;
+    descripción.classList.remove("border-green-600");
+    monto.classList.remove("border-green-600");
+  }
+});
+actualizarTarjetas();
 
-  actualizarTarjetas();
-
-/* Que no se pueda enviar el form vacio(validaciones)
-historial boton borrar y verificacion de categoria vacia.
-local storage
-un minimo de 4 */
+const msgDescripcion = document.getElementById("msgDescripción");
+const msgMonto = document.getElementById("msgMonto");
+fecha.value = `${new Date().toISOString().slice(0, 10)}`;
 
 const tabla = document.getElementById("tabla");
+const textoTabla = document.getElementById("textoTabla");
 
 const mostrarTabla = (parametro) => {
   const filtro = parametro.filter((e) => e.id > historial.length - 4);
@@ -201,20 +260,26 @@ const mostrarTabla = (parametro) => {
     .map(
       (e) =>
         `
-            <tr class="text-center">
-                <td class="text-red-800">${e.descripcion}</td>
-                <td class="text-red-800">${e.categoria}</td>
-                <td class="text-red-800">${e.monto}</td>
-                <td class="text-red-800"><button>Eliminar</button></td>
+            <tr>
+                <td>${e.descripcion}</td>
+                <td>${e.categoria}</td>
+                <td>${e.monto}</td>
+                <td><img src="./assets/borrar.png"></td>
             </tr>`,
     )
     .join("");
   tabla.innerHTML = filtrado;
+  if (tabla.children.length == 0) {
+    textoTabla.classList.replace("invisible", "visible");
+  } else {
+    textoTabla.classList.replace("visible", "invisible");
+  }
 };
+
 mostrarTabla(historial);
 
 const botonEliminar = () => {
-  const botones = document.querySelectorAll("td button");
+  const botones = document.querySelectorAll("td img");
   botones.forEach((b) => {
     b.addEventListener("click", (event) => {
       let tr = event.target.closest("tr");
@@ -236,8 +301,6 @@ const eliminarRegistro = (descripcion, categoria, monto) => {
   botonEliminar();
 };
 
-/* TODOS ingresos o gastos/ categoria monto fecha*/
-
 const select = document.getElementById("filtroCategoria");
 
 select.addEventListener("change", (e) => {
@@ -248,5 +311,3 @@ select.addEventListener("change", (e) => {
     mostrarTabla(historial);
   }
 });
-
-/* Como hacer trabajar a la misma funcion con y sin argumento */
