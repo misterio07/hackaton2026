@@ -308,6 +308,7 @@ const eliminarRegistro = (descripcion, categoria, monto) => {
       e.monto == monto,
   );
   historial.splice(historial.indexOf(elementoEliminar), 1);
+  localStorage.setItem("historial", JSON.stringify(historial));
   mostrarTabla(historial);
   botonEliminar();
 };
